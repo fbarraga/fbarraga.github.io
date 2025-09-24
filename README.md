@@ -1,1 +1,1 @@
-# fbarraga.github.io
+Aquesta pàgina és un recull de material i activitats per impartir els diferents mòduls de cicles formatius de informàtica
