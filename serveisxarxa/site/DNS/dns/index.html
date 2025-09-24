@@ -1,0 +1,2818 @@
+
+<!doctype html>
+<html lang="ca" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://fbarraga.github.io/serveisxarxa/DNS/dns/">
+      
+      
+        <link rel="prev" href="../../DHCP/dhcp/">
+      
+      
+        <link rel="next" href="../../serveiweb/serveisweb/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>DNS - Serveis de Xarxa i Internet</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../styles/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dns-sistema-de-noms-de-domini" class="md-skip">
+          Salta el contingut
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Capçalera">
+    <a href="../.." title="Serveis de Xarxa i Internet" class="md-header__button md-logo" aria-label="Serveis de Xarxa i Internet" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Serveis de Xarxa i Internet
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DNS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="deep-purple"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Neteja" aria-label="Neteja" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicialitzant cerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegació" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Serveis de Xarxa i Internet" class="md-nav__button md-logo" aria-label="Serveis de Xarxa i Internet" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Serveis de Xarxa i Internet
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inici
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../programacio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Programació
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DHCP/dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DHCP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    DNS
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    DNS
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccio-al-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducció al DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducció al DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-el-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Què és el DNS?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#per-que-es-important-el-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Per què és important el DNS?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historia-i-evolucio-del-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Història i Evolució del DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Història i Evolució del DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#els-origens-arpanet-i-el-fitxer-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Els Orígens: ARPANET i el fitxer HOSTS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-naixement-del-dns-1983-1987" class="md-nav__link">
+    <span class="md-ellipsis">
+      El naixement del DNS (1983-1987)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bind-la-implementacio-de-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      BIND: La implementació de referència
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-naixement-dicann-1998" class="md-nav__link">
+    <span class="md-ellipsis">
+      El naixement d'ICANN (1998)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El naixement d&#39;ICANN (1998)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcions-principals-dicann" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funcions principals d’ICANN
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitectura-i-funcionament-del-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquitectura i Funcionament del DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquitectura i Funcionament del DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estructura-jerarquica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura Jeràrquica
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#components-del-sistema-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Components del Sistema DNS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proces-de-resolucio-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procés de Resolució DNS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipus-de-registres-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipus de Registres DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipus de Registres DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registres-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registres Bàsics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registres-avancats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registres Avançats
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracio-de-dns-en-linux-amb-bind9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de DNS en Linux amb BIND9
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuració de DNS en Linux amb BIND9">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installacio-de-bind9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instal·lació de BIND9
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estructura-de-fitxers-de-configuracio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura de Fitxers de Configuració
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-basica-del-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració Bàsica del Servidor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creacio-de-zones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creació de Zones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracio-de-dns-en-windows-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de DNS en Windows Server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuració de DNS en Windows Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installacio-del-rol-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instal·lació del Rol DNS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-de-zones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de Zones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-de-forwarders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de Forwarders
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-de-dns-segur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de DNS Segur
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-secundari-i-replicacio" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS Secundari i Replicació
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DNS Secundari i Replicació">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepte-de-dns-secundari" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepte de DNS Secundari
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-en-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració en Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-en-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració en Windows
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolucio-de-problemes-i-eines-de-diagnostic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resolució de Problemes i Eines de Diagnòstic
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resolució de Problemes i Eines de Diagnòstic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eines-basiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eines Bàsiques
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagnostic-avancat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagnòstic Avançat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problemes-comuns-i-solucions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problemes Comuns i Solucions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguretat-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Seguretat DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Seguretat DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principals-amenaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principals Amenaces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dnssec-dns-security-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNSSEC (DNS Security Extensions)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#millors-practiques-de-seguretat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Millors Pràctiques de Seguretat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoritzacio-i-deteccio-damenaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitorització i Detecció d'Amenaces
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-en-entorns-cloud-i-contenidors" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS en Entorns Cloud i Contenidors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DNS en Entorns Cloud i Contenidors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dns-en-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS en Kubernetes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-en-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS en Docker
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1dns-com-a-servei-dns-as-a-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      1DNS com a Servei (DNS-as-a-Service)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimitzacio-del-rendiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimització del Rendiment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optimització del Rendiment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-de-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de Cache
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-de-views-split-horizon-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de Views (Split-horizon DNS)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anycast-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anycast DNS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compliment-normatiu-i-estandards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compliment Normatiu i Estàndards
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Compliment Normatiu i Estàndards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-rfcs-principals" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.1 RFCs Principals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compliment-gdpr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compliment GDPR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casos-dus-i-escenaris-practics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos d'Ús i Escenaris Pràctics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Casos d&#39;Ús i Escenaris Pràctics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dns-per-a-active-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS per a Active Directory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-per-a-serveis-de-correu" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS per a Serveis de Correu
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-per-a-balanceig-de-carrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS per a Balanceig de Càrrega
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-tendencies-futures" class="md-nav__link">
+    <span class="md-ellipsis">
+      14. Tendències Futures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Tendències Futures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-dns-over-https-doh-i-dns-over-tls-dot" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.1 DNS over HTTPS (DoH) i DNS over TLS (DoT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-dns-sobre-quic-doq" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.2 DNS sobre QUIC (DoQ)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-integracio-amb-ia-i-machine-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.3 Integració amb IA i Machine Learning
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencies-i-recursos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referències i Recursos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Referències i Recursos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentacio-oficial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentació Oficial
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llibres-recomanats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Llibres Recomanats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eines-i-recursos-online" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eines i Recursos Online
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comunitats-i-forums" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comunitats i Fòrums
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#glossari-de-termes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Glossari de Termes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activitats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activitats
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serveiweb/serveisweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Serveis Web
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serveiftp/serveisftp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Serveis FTP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../email/email/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    EMail
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../missatgeria/missatgeria/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Missatgeria
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../audio/audio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Audio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../video/video/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Video
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recursos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contacte/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contacte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccio-al-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducció al DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducció al DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-el-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Què és el DNS?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#per-que-es-important-el-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Per què és important el DNS?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historia-i-evolucio-del-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Història i Evolució del DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Història i Evolució del DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#els-origens-arpanet-i-el-fitxer-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Els Orígens: ARPANET i el fitxer HOSTS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-naixement-del-dns-1983-1987" class="md-nav__link">
+    <span class="md-ellipsis">
+      El naixement del DNS (1983-1987)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bind-la-implementacio-de-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      BIND: La implementació de referència
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-naixement-dicann-1998" class="md-nav__link">
+    <span class="md-ellipsis">
+      El naixement d'ICANN (1998)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El naixement d&#39;ICANN (1998)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcions-principals-dicann" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funcions principals d’ICANN
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitectura-i-funcionament-del-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquitectura i Funcionament del DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquitectura i Funcionament del DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estructura-jerarquica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura Jeràrquica
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#components-del-sistema-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Components del Sistema DNS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proces-de-resolucio-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procés de Resolució DNS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipus-de-registres-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipus de Registres DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipus de Registres DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registres-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registres Bàsics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registres-avancats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registres Avançats
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracio-de-dns-en-linux-amb-bind9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de DNS en Linux amb BIND9
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuració de DNS en Linux amb BIND9">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installacio-de-bind9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instal·lació de BIND9
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estructura-de-fitxers-de-configuracio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura de Fitxers de Configuració
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-basica-del-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració Bàsica del Servidor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creacio-de-zones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creació de Zones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracio-de-dns-en-windows-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de DNS en Windows Server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuració de DNS en Windows Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installacio-del-rol-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instal·lació del Rol DNS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-de-zones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de Zones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-de-forwarders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de Forwarders
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-de-dns-segur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de DNS Segur
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-secundari-i-replicacio" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS Secundari i Replicació
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DNS Secundari i Replicació">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepte-de-dns-secundari" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepte de DNS Secundari
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-en-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració en Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-en-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració en Windows
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolucio-de-problemes-i-eines-de-diagnostic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resolució de Problemes i Eines de Diagnòstic
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resolució de Problemes i Eines de Diagnòstic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eines-basiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eines Bàsiques
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagnostic-avancat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagnòstic Avançat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problemes-comuns-i-solucions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problemes Comuns i Solucions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguretat-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Seguretat DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Seguretat DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principals-amenaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principals Amenaces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dnssec-dns-security-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNSSEC (DNS Security Extensions)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#millors-practiques-de-seguretat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Millors Pràctiques de Seguretat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoritzacio-i-deteccio-damenaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitorització i Detecció d'Amenaces
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-en-entorns-cloud-i-contenidors" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS en Entorns Cloud i Contenidors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DNS en Entorns Cloud i Contenidors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dns-en-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS en Kubernetes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-en-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS en Docker
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1dns-com-a-servei-dns-as-a-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      1DNS com a Servei (DNS-as-a-Service)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimitzacio-del-rendiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimització del Rendiment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optimització del Rendiment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-de-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de Cache
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracio-de-views-split-horizon-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuració de Views (Split-horizon DNS)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anycast-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anycast DNS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compliment-normatiu-i-estandards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compliment Normatiu i Estàndards
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Compliment Normatiu i Estàndards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-rfcs-principals" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.1 RFCs Principals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compliment-gdpr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compliment GDPR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casos-dus-i-escenaris-practics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos d'Ús i Escenaris Pràctics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Casos d&#39;Ús i Escenaris Pràctics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dns-per-a-active-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS per a Active Directory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-per-a-serveis-de-correu" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS per a Serveis de Correu
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-per-a-balanceig-de-carrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS per a Balanceig de Càrrega
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-tendencies-futures" class="md-nav__link">
+    <span class="md-ellipsis">
+      14. Tendències Futures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Tendències Futures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-dns-over-https-doh-i-dns-over-tls-dot" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.1 DNS over HTTPS (DoH) i DNS over TLS (DoT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-dns-sobre-quic-doq" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.2 DNS sobre QUIC (DoQ)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-integracio-amb-ia-i-machine-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.3 Integració amb IA i Machine Learning
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencies-i-recursos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referències i Recursos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Referències i Recursos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentacio-oficial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentació Oficial
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llibres-recomanats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Llibres Recomanats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eines-i-recursos-online" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eines i Recursos Online
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comunitats-i-forums" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comunitats i Fòrums
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#glossari-de-termes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Glossari de Termes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activitats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activitats
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dns-sistema-de-noms-de-domini">DNS - Sistema de Noms de Domini</h1>
+<hr />
+<h2 id="introduccio-al-dns">Introducció al DNS</h2>
+<h3 id="que-es-el-dns">Què és el DNS?</h3>
+<p>El Domain Name System (DNS) és un servei fonamental d'Internet que actua com el "llistat telefònic d'Internet", traduint noms de domini llegibles pels humans (com ara google.com) en adreces IP numèriques (com ara 142.250.185.78) que les màquines poden entendre i utilitzar per comunicar-se entre elles.</p>
+<p>Sense DNS, hauríem de recordar les adreces IP numèriques de cada lloc web que volguéssim visitar, quelcom pràcticament impossible en l'Internet actual amb milions de llocs web disponibles. Aquest sistema distribuït i jeràrquic permet que Internet funcioni de manera eficient i escalable.</p>
+<h3 id="per-que-es-important-el-dns">Per què és important el DNS?</h3>
+<p>La importància del DNS radica en diversos factors crítics per al funcionament d'Internet i les xarxes corporatives. En primer lloc, proporciona una capa d'abstracció entre els usuaris i la infraestructura tècnica subjacent, permetent que els usuaris utilitzin noms memorables en lloc de números complexos.</p>
+<p>A més, el DNS és essencial per a la redundància i l'equilibri de càrrega. Un mateix nom de domini pot resoldre's a múltiples adreces IP, permetent distribuir el trànsit entre diversos servidors i proporcionar alta disponibilitat. També facilita la mobilitat dels serveis, ja que podem canviar l'adreça IP d'un servidor sense que els usuaris hagin de modificar res.</p>
+<hr />
+<h2 id="historia-i-evolucio-del-dns">Història i Evolució del DNS</h2>
+<h3 id="els-origens-arpanet-i-el-fitxer-hosts">Els Orígens: ARPANET i el fitxer HOSTS</h3>
+<p>Abans del DNS, a principis dels anys 70, ARPANET (el precursor d'Internet) utilitzava un sistema molt simple per a la resolució de noms. Cada ordinador mantenia un fitxer local anomenat HOSTS.TXT que contenia una llista de tots els ordinadors de la xarxa amb les seves adreces IP corresponents.</p>
+<p>Aquest fitxer es mantenia centralment al Stanford Research Institute (SRI) i els administradors de sistemes havien de descarregar-lo regularment via FTP per mantenir les seves còpies actualitzades. A mesura que ARPANET creixia, aquest sistema es va tornar insostenible per diversos motius: el fitxer creixia exponencialment, la càrrega al servidor central era enorme, i mantenir la consistència entre totes les còpies era pràcticament impossible.</p>
+<h3 id="el-naixement-del-dns-1983-1987">El naixement del DNS (1983-1987)</h3>
+<p><a href="https://ca.wikipedia.org/wiki/Paul_Mockapetris">Paul Mockapetris</a> va desenvolupar el DNS el 1983 a la University of Southern California com a solució als problemes del sistema HOSTS.TXT. Les especificacions originals es van publicar als RFC 882 i 883 el novembre de 1983, posteriorment substituïts pels RFC 1034 i 1035 el 1987, que encara són la base del DNS actual.</p>
+<p>El nou sistema introduïa conceptes revolucionaris com la jerarquia de dominis, la delegació d'autoritat, i la resolució distribuïda. Això permetia que cada organització gestionés el seu propi espai de noms sense dependre d'una autoritat central per a cada canvi.</p>
+<h3 id="bind-la-implementacio-de-referencia">BIND: La implementació de referència</h3>
+<p>BIND (Berkeley Internet Name Domain) és la implementació més antiga i utilitzada del protocol DNS, desenvolupada originalment a la University of California Berkeley. La primera versió de BIND es va llançar el 1984 com a part del sistema operatiu BSD 4.3.</p>
+<p>BIND 9, llançat el 2000, va ser una reescriptura completa del programari per millorar la seguretat, l'escalabilitat i afegir suport per a IPv6 i DNSSEC. Actualment, BIND continua sent el servidor DNS més desplegat a Internet, utilitzat tant per servidors arrel com per grans proveïdors de serveis.</p>
+<h3 id="el-naixement-dicann-1998">El naixement d'ICANN (1998)</h3>
+<p>Durant els anys 80 i 90, la gestió dels noms de domini i adreces IP estava força centralitzada. L’IANA (Internet Assigned Numbers Authority), dirigida per Jon Postel a la Universitat del Sud de Califòrnia (USC/ISI), era qui coordinava manualment moltes d’aquestes tasques. Però amb l’explosió d’Internet als 90, aquest model ja no era sostenible:</p>
+<ul>
+<li>Cada vegada hi havia més dominis i més usuaris.</li>
+<li>Empreses privades (com Network Solutions) havien obtingut contractes per gestionar registres de dominis, i això generava tensions sobre competència i preus.</li>
+<li>El govern dels Estats Units, a través del Departament de Comerç, encara tenia un paper molt fort en la governança d’Internet, cosa que altres països i actors volien internacionalitzar.</li>
+</ul>
+<p>Per això, el 1998 es va crear l’<a href="https://www.icann.org/es">ICANN</a> (Internet Corporation for Assigned Names and Numbers), una entitat sense ànim de lucre establerta a Califòrnia, amb la missió de gestionar aquestes funcions de manera més oberta, transparent i global.</p>
+<h4 id="funcions-principals-dicann">Funcions principals d’ICANN</h4>
+<p>ICANN no controla Internet, però sí que administra les peces bàsiques que la fan funcionar de manera única i coherent:</p>
+<ul>
+<li>Gestió del sistema de noms de domini (DNS)</li>
+<li>Coordina els TLD (Top-Level Domains) com .com, .org, .net, i també els de codi de país (.es, .cat, .fr…).</li>
+<li>Acredita i regula els registradors de dominis (empreses com GoDaddy, Namecheap, etc.).</li>
+<li>Assignació d’adreces IP i recursos d’Internet</li>
+<li>Supervisa la distribució global dels blocs d’adreces IPv4 i IPv6.Ho fa a través dels RIRs (Regional Internet Registries) com RIPE NCC (Europa), ARIN (Amèrica del Nord), APNIC (Àsia-Pacífic), etc.</li>
+<li>Gestió del sistema de servidors arrel del DNS</li>
+<li>Coordina els 13 servidors arrel lògics (A–M).</li>
+<li>S’assegura que hi hagi coherència i seguretat en la jerarquia global de noms.</li>
+<li>Polítiques de governança d’Internet</li>
+<li>Facilita processos oberts i participatius on comunitats tècniques, empreses, governs i usuaris debaten i defineixen regles sobre dominis, noves extensions (.app, .shop, etc.), seguretat, i privacitat.</li>
+<li>Seguretat i estabilitat</li>
+<li>Promou protocols com DNSSEC per protegir la integritat de les respostes DNS.</li>
+<li>Vetlla perquè Internet continuï sent estable i interoperable arreu del món.</li>
+</ul>
+<hr />
+<h2 id="arquitectura-i-funcionament-del-dns">Arquitectura i Funcionament del DNS</h2>
+<h3 id="estructura-jerarquica">Estructura Jeràrquica</h3>
+<p>El DNS s'organitza en una estructura d'arbre invertit amb diversos nivells. Al cim de la jerarquia trobem el domini arrel (root), representat per un punt (.). Sota l'arrel hi ha els dominis de primer nivell (TLD - Top Level Domains) com .com, .org, .es, .cat, etc.</p>
+<center>
+
+<pre class="mermaid"><code>flowchart TD;
+A[.] --&gt; B[.com];
+A --&gt; C[.org];
+A --&gt; D[.es];
+D --&gt; E[exemple.es];
+E --&gt; F[www.exemple.es];</code></pre>
+</center>
+
+<p>Cada nivell de la jerarquia delega l'autoritat sobre els seus subdominis al nivell inferior. Per exemple, el TLD .es delega l'autoritat sobre exemple.es a l'organització que ha registrat aquest domini. Aquesta delegació permet una gestió distribuïda i escalable del sistema global de noms.</p>
+<h3 id="components-del-sistema-dns">Components del Sistema DNS</h3>
+<p>El sistema DNS consta de diversos components clau que treballen conjuntament:</p>
+<p><strong>Servidors DNS Recursius (Resolvers):</strong> Aquests servidors reben consultes dels clients i s'encarreguen de trobar la resposta navegant per la jerarquia DNS. Mantenen una memòria cau (cache) de les respostes per millorar el rendiment i reduir la càrrega a la xarxa. Son els servidors que utilitzen els usuaris finals (normalment els del teu ISP o serveis com Google DNS 8.8.8.8 o Cloudflare 1.1.1.1)</p>
+<p><strong>Servidors DNS Autoritatius:</strong> Contenen la informació autoritativa sobre una zona DNS específica. Quan un servidor és autoritatiu per a una zona, les seves respostes es consideren definitives per a aquell domini.</p>
+<ul>
+<li>✅ <strong>Respostes autoritàries</strong> → provenen directament d’un servidor que gestiona la zona.</li>
+<li>⚠️ <strong>Respostes no autoritàries</strong> → provenen de la cache d’un servidor recursiu.</li>
+</ul>
+<p><strong>Servidors Arrel (Root Servers):</strong> Són els servidors al cim de la jerarquia DNS. Actualment hi ha 13 adreces IP de servidors arrel (anomenades A-M), encara que físicament són centenars de servidors distribuïts globalment utilitzant anycast.</p>
+<p><strong>Servidors de domini de primer nivell (TLD servers)</strong>: Contenen la informació dels dominis d’un TLD concret (per exemple, .com, .org, .es, .cat). Quan un recursiu pregunta per www.exemple.cat, el servidor .cat li diu quins són els autoritatius per exemple.cat.</p>
+<p><strong>Zona i registres DNS (namespace)</strong>: Una zona DNS és la part de l’espai de noms que un servidor autoritatiu administra. </p>
+<p><strong>Caches DNS</strong>:Tant els resolvers com els sistemes operatius i navegadors mantenen una cache local.Eviten repetir consultes i milloren el rendiment.Cada registre té un TTL (Time To Live) que marca quant de temps pot romandre en cache.</p>
+<hr />
+<h3 id="proces-de-resolucio-dns">Procés de Resolució DNS</h3>
+<p>Quan un usuari introdueix una URL al navegador, s'inicia un procés complex de resolució que segueix aquests passos:</p>
+<center>
+
+<pre class="mermaid"><code>flowchart TD
+    U[Usuari] --&gt; R[Resolver recursiu]
+    R --&gt; A[Servidors arrel]
+    A --&gt; T[TLD .com / .es / .org]
+    T --&gt; Z[Servidor autoritatiu]
+    Z --&gt;|Resposta definitiva| R
+    R --&gt; U</code></pre>
+</center>
+
+<ol>
+<li>
+<p><strong>Consulta al resolver local:</strong> El sistema operatiu primer consulta la seva cache local i el fitxer hosts. Si no troba la resposta, envia la consulta al servidor DNS configurat (normalment el del proveïdor d'Internet).</p>
+</li>
+<li>
+<p><strong>Resolució recursiva:</strong> Si el resolver no té la resposta a la seva cache, inicia una resolució recursiva començant pels servidors arrel, després els TLD, i finalment els servidors autoritatius del domini.</p>
+</li>
+<li>
+<p><strong>Emmagatzematge en cache:</strong> Cada resposta s'emmagatzema temporalment segons el seu TTL (Time To Live) per accelerar futures consultes.</p>
+</li>
+<li>
+<p><strong>Retorn de la resposta:</strong> Finalment, l'adreça IP es retorna a l'aplicació que la va sol·licitar.</p>
+</li>
+</ol>
+<hr />
+<h2 id="tipus-de-registres-dns">Tipus de Registres DNS</h2>
+<h3 id="registres-basics">Registres Bàsics</h3>
+<p><strong>Registre A (Address):</strong> Mapeja un nom de domini a una adreça IPv4. És el tipus de registre més comú i fonamental. Per exemple: <code>www.exemple.cat IN A 192.0.2.1</code></p>
+<p><strong>Registre AAAA:</strong> Similar al registre A però per a adreces IPv6. Exemple: <code>www.exemple.cat IN AAAA 2001:db8::1</code></p>
+<p><strong>Registre CNAME (Canonical Name):</strong> Crea un àlies d'un nom a un altre. Útil per apuntar múltiples noms al mateix servidor. Exemple: <code>ftp.exemple.cat IN CNAME www.exemple.cat</code></p>
+<p><strong>Registre MX (Mail Exchange):</strong> Especifica els servidors de correu per al domini, incloent una prioritat. Exemple: <code>exemple.cat IN MX 10 mail.exemple.cat</code></p>
+<h3 id="registres-avancats">Registres Avançats</h3>
+<p><strong>Registre NS (Name Server):</strong> Indica quins servidors DNS són autoritatius per a una zona. Fonamental per a la delegació de subdominis.</p>
+<p><strong>Registre PTR (Pointer):</strong> Utilitzat per a la resolució inversa (d'IP a nom). Essencial per a la verificació de servidors de correu.</p>
+<p><strong>Registre SOA (Start of Authority):</strong> Conté informació administrativa sobre la zona, incloent el servidor primari, el correu de l'administrador, i diversos temporitzadors per a la sincronització.</p>
+<p><strong>Registre TXT:</strong> Permet emmagatzemar text arbitrari. Utilitzat per SPF, DKIM, verificació de domini, i altres propòsits.</p>
+<p><strong>Registre SRV (Service):</strong> Especifica la ubicació de serveis específics, incloent port i prioritat. Utilitzat per protocols com SIP, XMPP, i Active Directory.</p>
+<p><strong>Registre CAA (Certification Authority Authorization):</strong> Especifica quines autoritats de certificació poden emetre certificats SSL per al domini.</p>
+<hr />
+<h2 id="configuracio-de-dns-en-linux-amb-bind9">Configuració de DNS en Linux amb BIND9</h2>
+<h3 id="installacio-de-bind9">Instal·lació de BIND9</h3>
+<p>En sistemes basats en Debian/Ubuntu, la instal·lació és senzilla:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Actualització del sistema</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Instal·lació de BIND9 i eines relacionades</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>bind9<span class="w"> </span>bind9utils<span class="w"> </span>bind9-doc<span class="w"> </span>dnsutils
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Verificació del servei</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>bind9
+</span></code></pre></div>
+<p>Per a sistemes basats en Red Hat/CentOS:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Instal·lació en RHEL/CentOS</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="nb">bind</span><span class="w"> </span>bind-utils
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Iniciar i habilitar el servei</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>named
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>named
+</span></code></pre></div>
+<h3 id="estructura-de-fitxers-de-configuracio">Estructura de Fitxers de Configuració</h3>
+<p>Els fitxers de configuració de BIND es troben a <code>/etc/bind/</code> en sistemes Debian/Ubuntu. L'estructura típica inclou:</p>
+<ul>
+<li><strong>named.conf:</strong> Fitxer principal de configuració</li>
+<li><strong>named.conf.options:</strong> Opcions globals del servidor</li>
+<li><strong>named.conf.local:</strong> Definició de zones locals</li>
+<li><strong>named.conf.default-zones:</strong> Zones per defecte (localhost, broadcast, etc.)</li>
+</ul>
+<h3 id="configuracio-basica-del-servidor">Configuració Bàsica del Servidor</h3>
+<p>Configuració del fitxer <code>/etc/bind/named.conf.options</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Definició de la xarxa interna</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>acl<span class="w"> </span><span class="s2">&quot;xarxa-interna&quot;</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="m">192</span>.168.1.0/24<span class="p">;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="m">10</span>.0.0.0/8<span class="p">;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span>localhost<span class="p">;</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>options<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span>directory<span class="w"> </span><span class="s2">&quot;/var/cache/bind&quot;</span><span class="p">;</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="c1"># Configuració de seguretat</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span>recursion<span class="w"> </span>yes<span class="p">;</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span>allow-recursion<span class="w"> </span><span class="o">{</span><span class="w"> </span>xarxa-interna<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span>allow-query<span class="w"> </span><span class="o">{</span><span class="w"> </span>xarxa-interna<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span>allow-transfer<span class="w"> </span><span class="o">{</span><span class="w"> </span>none<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="c1"># Forwarders (DNS externs)</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span>forwarders<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">        </span><span class="m">8</span>.8.8.8<span class="p">;</span><span class="w">        </span><span class="c1"># Google DNS</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">        </span><span class="m">1</span>.1.1.1<span class="p">;</span><span class="w">        </span><span class="c1"># Cloudflare DNS</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">    </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">    </span>forward<span class="w"> </span>only<span class="p">;</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">    </span><span class="c1"># Configuració DNSSEC</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">    </span>dnssec-validation<span class="w"> </span>auto<span class="p">;</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">    </span><span class="c1"># IPv6</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">    </span>listen-on-v6<span class="w"> </span><span class="o">{</span><span class="w"> </span>any<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">    </span><span class="c1"># Amagar versió de BIND</span>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">    </span>version<span class="w"> </span><span class="s2">&quot;DNS Server&quot;</span><span class="p">;</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<h3 id="creacio-de-zones">Creació de Zones</h3>
+<p>Definició de zones al fitxer <code>/etc/bind/named.conf.local</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Zona directa</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>zone<span class="w"> </span><span class="s2">&quot;empresa.local&quot;</span><span class="w"> </span>IN<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nb">type</span><span class="w"> </span>master<span class="p">;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span>file<span class="w"> </span><span class="s2">&quot;/etc/bind/zones/db.empresa.local&quot;</span><span class="p">;</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span>allow-update<span class="w"> </span><span class="o">{</span><span class="w"> </span>none<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># Zona inversa</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>zone<span class="w"> </span><span class="s2">&quot;1.168.192.in-addr.arpa&quot;</span><span class="w"> </span>IN<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nb">type</span><span class="w"> </span>master<span class="p">;</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span>file<span class="w"> </span><span class="s2">&quot;/etc/bind/zones/db.192.168.1&quot;</span><span class="p">;</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span>allow-update<span class="w"> </span><span class="o">{</span><span class="w"> </span>none<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<p>Exemple de fitxer de zona directa (<code>/etc/bind/zones/db.empresa.local</code>):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">$TTL</span><span class="w"> </span><span class="m">86400</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>@<span class="w">       </span>IN<span class="w">      </span>SOA<span class="w">     </span>ns1.empresa.local.<span class="w"> </span>admin.empresa.local.<span class="w"> </span><span class="o">(</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">                        </span><span class="m">2024010101</span><span class="w">      </span><span class="p">;</span><span class="w"> </span>Serial
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">                        </span><span class="m">3600</span><span class="w">            </span><span class="p">;</span><span class="w"> </span>Refresh<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>hora<span class="o">)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">                        </span><span class="m">1800</span><span class="w">            </span><span class="p">;</span><span class="w"> </span>Retry<span class="w"> </span><span class="o">(</span><span class="m">30</span><span class="w"> </span>minuts<span class="o">)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">                        </span><span class="m">604800</span><span class="w">          </span><span class="p">;</span><span class="w"> </span>Expire<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>setmana<span class="o">)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">                        </span><span class="m">86400</span><span class="w"> </span><span class="o">)</span><span class="w">         </span><span class="p">;</span><span class="w"> </span>Minimum<span class="w"> </span>TTL<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>dia<span class="o">)</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">;</span><span class="w"> </span>Servidors<span class="w"> </span>de<span class="w"> </span>noms
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">        </span>IN<span class="w">      </span>NS<span class="w">      </span>ns1.empresa.local.
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">        </span>IN<span class="w">      </span>NS<span class="w">      </span>ns2.empresa.local.
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="p">;</span><span class="w"> </span>Registres<span class="w"> </span>A
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>ns1<span class="w">     </span>IN<span class="w">      </span>A<span class="w">       </span><span class="m">192</span>.168.1.10
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>ns2<span class="w">     </span>IN<span class="w">      </span>A<span class="w">       </span><span class="m">192</span>.168.1.11
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>www<span class="w">     </span>IN<span class="w">      </span>A<span class="w">       </span><span class="m">192</span>.168.1.20
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>mail<span class="w">    </span>IN<span class="w">      </span>A<span class="w">       </span><span class="m">192</span>.168.1.25
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>ftp<span class="w">     </span>IN<span class="w">      </span>A<span class="w">       </span><span class="m">192</span>.168.1.30
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="p">;</span><span class="w"> </span>Registres<span class="w"> </span>CNAME
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>webmail<span class="w"> </span>IN<span class="w">      </span>CNAME<span class="w">   </span>mail
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>portal<span class="w">  </span>IN<span class="w">      </span>CNAME<span class="w">   </span>www
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="p">;</span><span class="w"> </span>Registre<span class="w"> </span>MX
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>@<span class="w">       </span>IN<span class="w">      </span>MX<span class="w">      </span><span class="m">10</span><span class="w">      </span>mail.empresa.local.
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="p">;</span><span class="w"> </span>Registres<span class="w"> </span>TXT
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>@<span class="w">       </span>IN<span class="w">      </span>TXT<span class="w">     </span><span class="s2">&quot;v=spf1 mx -all&quot;</span>
+</span></code></pre></div>
+<hr />
+<h2 id="configuracio-de-dns-en-windows-server">Configuració de DNS en Windows Server</h2>
+<h3 id="installacio-del-rol-dns">Instal·lació del Rol DNS</h3>
+<p>En Windows Server 2022, la instal·lació del rol DNS es pot fer mitjançant Server Manager o PowerShell.</p>
+<p>Mitjançant PowerShell:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c"># Instal·lació del rol DNS</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">Install-WindowsFeature</span> <span class="n">-Name</span> <span class="n">DNS</span> <span class="n">-IncludeManagementTools</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c"># Verificació de la instal·lació</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nb">Get-WindowsFeature</span> <span class="n">-Name</span> <span class="n">DNS</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c"># Reiniciar el servei DNS</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nb">Restart-Service</span> <span class="n">DNS</span>
+</span></code></pre></div>
+<p>Mitjançant Server Manager:</p>
+<ol>
+<li>Obrir Server Manager</li>
+<li>Seleccionar "Add Roles and Features"</li>
+<li>Seleccionar "Role-based or feature-based installation"</li>
+<li>Triar el servidor local</li>
+<li>Marcar "DNS Server"</li>
+<li>Completar l'assistent d'instal·lació</li>
+</ol>
+<h3 id="configuracio-de-zones">Configuració de Zones</h3>
+<p>La configuració es pot fer des de la consola DNS (dnsmgmt.msc) o PowerShell.</p>
+<p>Creació de zona directa amb PowerShell:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c"># Crear zona primària</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">Add-DnsServerPrimaryZone</span> <span class="n">-Name</span> <span class="s2">&quot;empresa.local&quot;</span> <span class="p">`</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">-ReplicationScope</span> <span class="s2">&quot;Domain&quot;</span> <span class="p">`</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">-DynamicUpdate</span> <span class="s2">&quot;Secure&quot;</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c"># Afegir registres A</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="nb">Add-DnsServerResourceRecordA</span> <span class="n">-Name</span> <span class="s2">&quot;www&quot;</span> <span class="p">`</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="n">-ZoneName</span> <span class="s2">&quot;empresa.local&quot;</span> <span class="p">`</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="n">-IPv4Address</span> <span class="s2">&quot;192.168.1.20&quot;</span> <span class="p">`</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    <span class="n">-TimeToLive</span> <span class="n">01</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="c"># Afegir registre MX</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="nb">Add-DnsServerResourceRecordMX</span> <span class="n">-Name</span> <span class="s2">&quot;.&quot;</span> <span class="p">`</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    <span class="n">-ZoneName</span> <span class="s2">&quot;empresa.local&quot;</span> <span class="p">`</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    <span class="n">-MailExchange</span> <span class="s2">&quot;mail.empresa.local&quot;</span> <span class="p">`</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>    <span class="n">-Preference</span> <span class="n">10</span>
+</span></code></pre></div>
+<h3 id="configuracio-de-forwarders">Configuració de Forwarders</h3>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c"># Configurar DNS forwarders</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">Add-DnsServerForwarder</span> <span class="n">-IPAddress</span> <span class="n">8</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">8</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">Add-DnsServerForwarder</span> <span class="n">-IPAddress</span> <span class="n">1</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">1</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c"># Verificar forwarders</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nb">Get-DnsServerForwarder</span>
+</span></code></pre></div>
+<h3 id="configuracio-de-dns-segur">Configuració de DNS Segur</h3>
+<p>Windows Server 2022 suporta DNS over HTTPS (DoH) per al client DNS:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c"># Afegir servidor DoH conegut</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">Add-DnsClientDohServerAddress</span> <span class="p">`</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="n">-ServerAddress</span> <span class="s2">&quot;1.1.1.1&quot;</span> <span class="p">`</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="n">-DohTemplate</span> <span class="s2">&quot;https://cloudflare-dns.com/dns-query&quot;</span> <span class="p">`</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="n">-AllowFallbackToUdp</span> <span class="nv">$False</span> <span class="p">`</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">-AutoUpgrade</span> <span class="nv">$True</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c"># Verificar configuració DoH</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="nb">Get-DnsClientDohServerAddress</span>
+</span></code></pre></div>
+<hr />
+<h2 id="dns-secundari-i-replicacio">DNS Secundari i Replicació</h2>
+<h3 id="concepte-de-dns-secundari">Concepte de DNS Secundari</h3>
+<p>Un servidor DNS secundari manté una còpia de només lectura de les zones d'un servidor primari. Això proporciona redundància i millora el rendiment distribuint la càrrega de consultes.</p>
+<p>El servidor secundari sincronitza periòdicament les seves dades amb el primari mitjançant transferències de zona.</p>
+<h3 id="configuracio-en-linux">Configuració en Linux</h3>
+<p>Al servidor primari, modificar la zona per permetre transferències:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>zone<span class="w"> </span><span class="s2">&quot;empresa.local&quot;</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nb">type</span><span class="w"> </span>master<span class="p">;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span>file<span class="w"> </span><span class="s2">&quot;/etc/bind/zones/db.empresa.local&quot;</span><span class="p">;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span>allow-transfer<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="m">192</span>.168.1.11<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span><span class="w">  </span><span class="c1"># IP del secundari</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span>also-notify<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="m">192</span>.168.1.11<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<p>Al servidor secundari:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>zone<span class="w"> </span><span class="s2">&quot;empresa.local&quot;</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="nb">type</span><span class="w"> </span>slave<span class="p">;</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span>file<span class="w"> </span><span class="s2">&quot;/var/cache/bind/db.empresa.local&quot;</span><span class="p">;</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span>masters<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="m">192</span>.168.1.10<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span><span class="w">  </span><span class="c1"># IP del primari</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<h3 id="configuracio-en-windows">Configuració en Windows</h3>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c"># Al servidor primari - permetre transferències</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">Set-DnsServerPrimaryZone</span> <span class="n">-Name</span> <span class="s2">&quot;empresa.local&quot;</span> <span class="p">`</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">-SecondaryServers</span> <span class="s2">&quot;192.168.1.11&quot;</span> <span class="p">`</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="n">-SecureSecondaries</span> <span class="n">TransferToSecureServers</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="c"># Al servidor secundari - crear zona secundària</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nb">Add-DnsServerSecondaryZone</span> <span class="n">-Name</span> <span class="s2">&quot;empresa.local&quot;</span> <span class="p">`</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    <span class="n">-ZoneFile</span> <span class="s2">&quot;empresa.local.dns&quot;</span> <span class="p">`</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    <span class="n">-MasterServers</span> <span class="s2">&quot;192.168.1.10&quot;</span>
+</span></code></pre></div>
+<hr />
+<h2 id="resolucio-de-problemes-i-eines-de-diagnostic">Resolució de Problemes i Eines de Diagnòstic</h2>
+<h3 id="eines-basiques">Eines Bàsiques</h3>
+<p><strong>nslookup:</strong> Eina multiplataforma per a consultes DNS bàsiques:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Consulta simple</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>nslookup<span class="w"> </span>www.google.com
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># Consulta a servidor específic</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>nslookup<span class="w"> </span>www.google.com<span class="w"> </span><span class="m">8</span>.8.8.8
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="c1"># Consulta de registre MX</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>nslookup<span class="w"> </span>-type<span class="o">=</span>mx<span class="w"> </span>gmail.com
+</span></code></pre></div>
+<p><strong>dig (Domain Information Groper):</strong> Eina més potent i flexible:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Consulta detallada</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>dig<span class="w"> </span>www.exemple.cat
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1"># Consulta específica de tipus</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>dig<span class="w"> </span>MX<span class="w"> </span>exemple.cat
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="c1"># Traçar el camí de resolució</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>dig<span class="w"> </span>+trace<span class="w"> </span>www.exemple.cat
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="c1"># Consulta inversa</span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>dig<span class="w"> </span>-x<span class="w"> </span><span class="m">192</span>.0.2.1
+</span></code></pre></div>
+<p><strong>host:</strong> Eina simple per a consultes ràpides:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Consulta bàsica</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>host<span class="w"> </span>www.exemple.cat
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># Tots els registres</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>host<span class="w"> </span>-a<span class="w"> </span>exemple.cat
+</span></code></pre></div>
+<h3 id="diagnostic-avancat">Diagnòstic Avançat</h3>
+<p><strong>Verificació de configuració BIND:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Verificar sintaxi de named.conf</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>sudo<span class="w"> </span>named-checkconf
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># Verificar fitxer de zona</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>sudo<span class="w"> </span>named-checkzone<span class="w"> </span>empresa.local<span class="w"> </span>/etc/bind/zones/db.empresa.local
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># Veure el log del servei</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>bind9<span class="w"> </span>-f
+</span></code></pre></div>
+<p><strong>Anàlisi de cache:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Veure estadístiques del servidor</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sudo<span class="w"> </span>rndc<span class="w"> </span>stats
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># Buidar la cache</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>sudo<span class="w"> </span>rndc<span class="w"> </span>flush
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="c1"># Veure la cache actual</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>sudo<span class="w"> </span>rndc<span class="w"> </span>dumpdb<span class="w"> </span>-cache
+</span></code></pre></div>
+<h3 id="problemes-comuns-i-solucions">Problemes Comuns i Solucions</h3>
+<p><strong>Problema: El servidor no respon a consultes externes</strong></p>
+<p>Solució: Verificar la configuració d'<code>allow-query</code> i les regles del firewall:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Verificar configuració</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;allow-query&quot;</span><span class="w"> </span>/etc/bind/named.conf.options
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># Obrir ports al firewall (Ubuntu/UFW)</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">53</span>/tcp
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">53</span>/udp
+</span></code></pre></div>
+<p><strong>Problema: La zona no es transfereix al servidor secundari</strong></p>
+<p>Solució: Verificar <code>allow-transfer</code> i incrementar el número de sèrie:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Al primari - verificar permisos de transferència</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;allow-transfer&quot;</span><span class="w"> </span>/etc/bind/named.conf.local
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="c1"># Incrementar serial i recarregar</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/bind/zones/db.empresa.local<span class="w">  </span><span class="c1"># Incrementar serial</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>sudo<span class="w"> </span>rndc<span class="w"> </span>reload<span class="w"> </span>empresa.local
+</span></code></pre></div>
+<hr />
+<h2 id="seguretat-dns">Seguretat DNS</h2>
+<h3 id="principals-amenaces">Principals Amenaces</h3>
+<p>Segons una enquesta d'IDC de 2021, el 87% de les organitzacions han patit atacs DNS, amb un cost mitjà d'aproximadament 950.000 dòlars per atac.</p>
+<p><strong>DNS Cache Poisoning (Enverinament de Cache):</strong></p>
+<p>Aquest atac intenta corrompre la cache DNS per redirigir els usuaris a llocs maliciosos. L'atacant injecta respostes DNS falses abans que arribi la resposta legítima.</p>
+<p><strong>DNS Amplification/DDoS:</strong></p>
+<p>L'atacant envia peticions DNS amb l'adreça IP de la víctima falsificada com a origen, causant que les respostes (molt més grans) es dirigeixin a la víctima.</p>
+<p><strong>DNS Tunneling:</strong></p>
+<p>Tècnica que codifica dades en consultes i respostes DNS per exfiltrar informació o establir canals de comandament i control evitant els firewalls.</p>
+<p><strong>DNS Hijacking:</strong></p>
+<p>L'atacant modifica els servidors DNS o el registrador de domini per desviar el trànsit.</p>
+<h3 id="dnssec-dns-security-extensions">DNSSEC (DNS Security Extensions)</h3>
+<p>DNSSEC afegeix signatures digitals als registres DNS per garantir-ne l'autenticitat i integritat.</p>
+<p>Configuració de DNSSEC en BIND9:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># Generar claus per a la zona</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nb">cd</span><span class="w"> </span>/etc/bind/keys/
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>dnssec-keygen<span class="w"> </span>-a<span class="w"> </span>RSASHA256<span class="w"> </span>-b<span class="w"> </span><span class="m">2048</span><span class="w"> </span>-n<span class="w"> </span>ZONE<span class="w"> </span>empresa.local
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>dnssec-keygen<span class="w"> </span>-a<span class="w"> </span>RSASHA256<span class="w"> </span>-b<span class="w"> </span><span class="m">4096</span><span class="w"> </span>-n<span class="w"> </span>ZONE<span class="w"> </span>-f<span class="w"> </span>KSK<span class="w"> </span>empresa.local
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="c1"># Signar la zona</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>dnssec-signzone<span class="w"> </span>-A<span class="w"> </span>-3<span class="w"> </span><span class="k">$(</span>head<span class="w"> </span>-c<span class="w"> </span><span class="m">1000</span><span class="w"> </span>/dev/random<span class="w"> </span><span class="p">|</span><span class="w"> </span>sha1sum<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-b<span class="w"> </span><span class="m">1</span>-16<span class="k">)</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">    </span>-N<span class="w"> </span>INCREMENT<span class="w"> </span>-o<span class="w"> </span>empresa.local<span class="w"> </span>-t<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">    </span>/etc/bind/zones/db.empresa.local
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="c1"># Configurar BIND per usar la zona signada</span>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>zone<span class="w"> </span><span class="s2">&quot;empresa.local&quot;</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="w">    </span><span class="nb">type</span><span class="w"> </span>master<span class="p">;</span>
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="w">    </span>file<span class="w"> </span><span class="s2">&quot;/etc/bind/zones/db.empresa.local.signed&quot;</span><span class="p">;</span>
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="w">    </span><span class="c1"># ... resta de configuració</span>
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<h3 id="millors-practiques-de-seguretat">Millors Pràctiques de Seguretat</h3>
+<p>Les millors pràctiques inclouen implementar limitació de taxa (rate limiting) per controlar el volum de trànsit DNS.</p>
+<p><strong>1. Restringir Consultes Recursives:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Només permetre recursió des de xarxes de confiança</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>options<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span>recursion<span class="w"> </span>yes<span class="p">;</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span>allow-recursion<span class="w"> </span><span class="o">{</span><span class="w"> </span>xarxa-interna<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<p><strong>2. Implementar Rate Limiting:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># Limitar consultes per client</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>rate-limit<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">    </span>responses-per-second<span class="w"> </span><span class="m">10</span><span class="p">;</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">    </span>window<span class="w"> </span><span class="m">5</span><span class="p">;</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<p><strong>3. Amagar Versió de BIND:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>options<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span>version<span class="w"> </span><span class="s2">&quot;DNS Server&quot;</span><span class="p">;</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">    </span>hostname<span class="w"> </span><span class="s2">&quot;NS&quot;</span><span class="p">;</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">    </span>server-id<span class="w"> </span>none<span class="p">;</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<p><strong>4. Desactivar Transferències de Zona No Autoritzades:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>options<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">    </span>allow-transfer<span class="w"> </span><span class="o">{</span><span class="w"> </span>none<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="c1"># O només a servidors específics</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>zone<span class="w"> </span><span class="s2">&quot;empresa.local&quot;</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">    </span>allow-transfer<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="m">192</span>.168.1.11<span class="p">;</span><span class="w"> </span>key<span class="w"> </span>transfer-key<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<p><strong>5. Utilitzar TSIG per a Transferències Segures:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Generar clau TSIG</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>dnssec-keygen<span class="w"> </span>-a<span class="w"> </span>HMAC-SHA256<span class="w"> </span>-b<span class="w"> </span><span class="m">256</span><span class="w"> </span>-n<span class="w"> </span>HOST<span class="w"> </span>transfer-key
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="c1"># Configurar la clau</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>key<span class="w"> </span><span class="s2">&quot;transfer-key&quot;</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">    </span>algorithm<span class="w"> </span>hmac-sha256<span class="p">;</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">    </span>secret<span class="w"> </span><span class="s2">&quot;base64-encoded-secret-key&quot;</span><span class="p">;</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="c1"># Usar la clau per a transferències</span>
+</span><span id="__span-24-11"><a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>server<span class="w"> </span><span class="m">192</span>.168.1.11<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-24-12"><a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="w">    </span>keys<span class="w"> </span><span class="o">{</span><span class="w"> </span>transfer-key<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-24-13"><a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<h3 id="monitoritzacio-i-deteccio-damenaces">Monitorització i Detecció d'Amenaces</h3>
+<p>És essencial registrar i monitoritzar les consultes DNS per detectar anomalies.</p>
+<p>Configuració de logging detallat:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>logging<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span>channel<span class="w"> </span>security_log<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">        </span>file<span class="w"> </span><span class="s2">&quot;/var/log/bind/security.log&quot;</span><span class="w"> </span>versions<span class="w"> </span><span class="m">3</span><span class="w"> </span>size<span class="w"> </span>10m<span class="p">;</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">        </span>severity<span class="w"> </span>info<span class="p">;</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">        </span>print-time<span class="w"> </span>yes<span class="p">;</span>
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">        </span>print-severity<span class="w"> </span>yes<span class="p">;</span>
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">        </span>print-category<span class="w"> </span>yes<span class="p">;</span>
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="w">    </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="w">    </span>channel<span class="w"> </span>query_log<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="w">        </span>file<span class="w"> </span><span class="s2">&quot;/var/log/bind/query.log&quot;</span><span class="w"> </span>versions<span class="w"> </span><span class="m">3</span><span class="w"> </span>size<span class="w"> </span>50m<span class="p">;</span>
+</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a><span class="w">        </span>severity<span class="w"> </span>info<span class="p">;</span>
+</span><span id="__span-25-13"><a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="w">        </span>print-time<span class="w"> </span>yes<span class="p">;</span>
+</span><span id="__span-25-14"><a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a><span class="w">    </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-25-15"><a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>
+</span><span id="__span-25-16"><a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a><span class="w">    </span>category<span class="w"> </span>security<span class="w"> </span><span class="o">{</span><span class="w"> </span>security_log<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-25-17"><a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a><span class="w">    </span>category<span class="w"> </span>queries<span class="w"> </span><span class="o">{</span><span class="w"> </span>query_log<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-25-18"><a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a><span class="w">    </span>category<span class="w"> </span>query-errors<span class="w"> </span><span class="o">{</span><span class="w"> </span>query_log<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-25-19"><a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<p>Eines per analitzar logs:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># Veure les consultes més freqüents</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>cat<span class="w"> </span>/var/log/bind/query.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;query:&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span>awk<span class="w"> </span><span class="s1">&#39;{print $8}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="c1"># Detectar possibles atacs DDoS</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/bind/query.log<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">    </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;denied|REFUSED|SERVFAIL&quot;</span>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="c1"># Analitzar patrons sospitosos</span>
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;ANY|AXFR&quot;</span><span class="w"> </span>/var/log/bind/query.log
+</span></code></pre></div>
+<hr />
+<h2 id="dns-en-entorns-cloud-i-contenidors">DNS en Entorns Cloud i Contenidors</h2>
+<h3 id="dns-en-kubernetes">DNS en Kubernetes</h3>
+<p>Kubernetes utilitza CoreDNS com a servidor DNS per defecte, proporcionant resolució de noms per a serveis i pods.</p>
+<p>Exemple de configuració de CoreDNS:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coredns</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kube-system</span>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="nt">data</span><span class="p">:</span>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="w">  </span><span class="nt">Corefile</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="w">    </span><span class="no">.:53 {</span>
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="w">        </span><span class="no">errors</span>
+</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="w">        </span><span class="no">health {</span>
+</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a><span class="w">           </span><span class="no">lameduck 5s</span>
+</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="w">        </span><span class="no">}</span>
+</span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a><span class="w">        </span><span class="no">ready</span>
+</span><span id="__span-27-14"><a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a><span class="w">        </span><span class="no">kubernetes cluster.local in-addr.arpa ip6.arpa {</span>
+</span><span id="__span-27-15"><a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a><span class="w">           </span><span class="no">pods insecure</span>
+</span><span id="__span-27-16"><a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a><span class="w">           </span><span class="no">fallthrough in-addr.arpa ip6.arpa</span>
+</span><span id="__span-27-17"><a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a><span class="w">           </span><span class="no">ttl 30</span>
+</span><span id="__span-27-18"><a id="__codelineno-27-18" name="__codelineno-27-18" href="#__codelineno-27-18"></a><span class="w">        </span><span class="no">}</span>
+</span><span id="__span-27-19"><a id="__codelineno-27-19" name="__codelineno-27-19" href="#__codelineno-27-19"></a><span class="w">        </span><span class="no">prometheus :9153</span>
+</span><span id="__span-27-20"><a id="__codelineno-27-20" name="__codelineno-27-20" href="#__codelineno-27-20"></a><span class="w">        </span><span class="no">forward . /etc/resolv.conf {</span>
+</span><span id="__span-27-21"><a id="__codelineno-27-21" name="__codelineno-27-21" href="#__codelineno-27-21"></a><span class="w">           </span><span class="no">max_concurrent 1000</span>
+</span><span id="__span-27-22"><a id="__codelineno-27-22" name="__codelineno-27-22" href="#__codelineno-27-22"></a><span class="w">        </span><span class="no">}</span>
+</span><span id="__span-27-23"><a id="__codelineno-27-23" name="__codelineno-27-23" href="#__codelineno-27-23"></a><span class="w">        </span><span class="no">cache 30</span>
+</span><span id="__span-27-24"><a id="__codelineno-27-24" name="__codelineno-27-24" href="#__codelineno-27-24"></a><span class="w">        </span><span class="no">loop</span>
+</span><span id="__span-27-25"><a id="__codelineno-27-25" name="__codelineno-27-25" href="#__codelineno-27-25"></a><span class="w">        </span><span class="no">reload</span>
+</span><span id="__span-27-26"><a id="__codelineno-27-26" name="__codelineno-27-26" href="#__codelineno-27-26"></a><span class="w">        </span><span class="no">loadbalance</span>
+</span><span id="__span-27-27"><a id="__codelineno-27-27" name="__codelineno-27-27" href="#__codelineno-27-27"></a><span class="w">    </span><span class="no">}</span>
+</span></code></pre></div>
+<h3 id="dns-en-docker">DNS en Docker</h3>
+<p>Docker utilitza un servidor DNS embedded per a la resolució de noms entre contenidors:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># Crear xarxa personalitzada amb DNS</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>--driver<span class="w"> </span>bridge<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">    </span>--subnet<span class="o">=</span><span class="m">172</span>.20.0.0/16<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">    </span>--opt<span class="w"> </span><span class="s2">&quot;com.docker.network.bridge.name&quot;</span><span class="o">=</span><span class="s2">&quot;docker-dns&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">    </span>mynetwork
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="c1"># Executar contenidor amb DNS personalitzat</span>
+</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="w">    </span>--name<span class="w"> </span>myapp<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="w">    </span>--network<span class="w"> </span>mynetwork<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="w">    </span>--dns<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a><span class="w">    </span>--dns-search<span class="w"> </span>exemple.local<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-13"><a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a><span class="w">    </span>nginx
+</span></code></pre></div>
+<h3 id="1dns-com-a-servei-dns-as-a-service">1DNS com a Servei (DNS-as-a-Service)</h3>
+<p>Molts proveïdors cloud ofereixen serveis DNS gestionats:</p>
+<ul>
+<li><strong>AWS Route 53:</strong> Servei DNS altament disponible i escalable</li>
+<li><strong>Azure DNS:</strong> Integrat amb els serveis de Microsoft Azure</li>
+<li><strong>Google Cloud DNS:</strong> DNS global amb baixa latència</li>
+<li><strong>Cloudflare DNS:</strong> Conegut per la seva velocitat i seguretat</li>
+</ul>
+<hr />
+<h2 id="optimitzacio-del-rendiment">Optimització del Rendiment</h2>
+<h3 id="configuracio-de-cache">Configuració de Cache</h3>
+<p>Optimitzar la cache pot millorar significativament el rendiment:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>options<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span><span class="c1"># Cache per a respostes positives</span>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span>max-cache-size<span class="w"> </span>256m<span class="p">;</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">    </span>max-cache-ttl<span class="w"> </span><span class="m">86400</span><span class="p">;</span>
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="w">    </span><span class="c1"># Cache per a respostes negatives</span>
+</span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="w">    </span>max-ncache-ttl<span class="w"> </span><span class="m">3600</span><span class="p">;</span>
+</span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>
+</span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="w">    </span><span class="c1"># Prefetch de registres abans que expirin</span>
+</span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="w">    </span>prefetch<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">9</span><span class="p">;</span>
+</span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<h3 id="configuracio-de-views-split-horizon-dns">Configuració de Views (Split-horizon DNS)</h3>
+<p>Permet servir diferents respostes segons l'origen de la consulta:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1"># Definir ACLs</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>acl<span class="w"> </span><span class="s2">&quot;interna&quot;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="m">192</span>.168.0.0/16<span class="p">;</span><span class="w"> </span><span class="m">10</span>.0.0.0/8<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>acl<span class="w"> </span><span class="s2">&quot;externa&quot;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>any<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="c1"># Vista interna</span>
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>view<span class="w"> </span><span class="s2">&quot;interna&quot;</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">    </span>match-clients<span class="w"> </span><span class="o">{</span><span class="w"> </span>interna<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>
+</span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="w">    </span>zone<span class="w"> </span><span class="s2">&quot;empresa.local&quot;</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-30-10"><a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="w">        </span><span class="nb">type</span><span class="w"> </span>master<span class="p">;</span>
+</span><span id="__span-30-11"><a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="w">        </span>file<span class="w"> </span><span class="s2">&quot;/etc/bind/zones/interna/db.empresa.local&quot;</span><span class="p">;</span>
+</span><span id="__span-30-12"><a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a><span class="w">    </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-30-13"><a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-30-14"><a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a>
+</span><span id="__span-30-15"><a id="__codelineno-30-15" name="__codelineno-30-15" href="#__codelineno-30-15"></a><span class="c1"># Vista externa</span>
+</span><span id="__span-30-16"><a id="__codelineno-30-16" name="__codelineno-30-16" href="#__codelineno-30-16"></a>view<span class="w"> </span><span class="s2">&quot;externa&quot;</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-30-17"><a id="__codelineno-30-17" name="__codelineno-30-17" href="#__codelineno-30-17"></a><span class="w">    </span>match-clients<span class="w"> </span><span class="o">{</span><span class="w"> </span>externa<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-30-18"><a id="__codelineno-30-18" name="__codelineno-30-18" href="#__codelineno-30-18"></a>
+</span><span id="__span-30-19"><a id="__codelineno-30-19" name="__codelineno-30-19" href="#__codelineno-30-19"></a><span class="w">    </span>zone<span class="w"> </span><span class="s2">&quot;empresa.local&quot;</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-30-20"><a id="__codelineno-30-20" name="__codelineno-30-20" href="#__codelineno-30-20"></a><span class="w">        </span><span class="nb">type</span><span class="w"> </span>master<span class="p">;</span>
+</span><span id="__span-30-21"><a id="__codelineno-30-21" name="__codelineno-30-21" href="#__codelineno-30-21"></a><span class="w">        </span>file<span class="w"> </span><span class="s2">&quot;/etc/bind/zones/externa/db.empresa.local&quot;</span><span class="p">;</span>
+</span><span id="__span-30-22"><a id="__codelineno-30-22" name="__codelineno-30-22" href="#__codelineno-30-22"></a><span class="w">    </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-30-23"><a id="__codelineno-30-23" name="__codelineno-30-23" href="#__codelineno-30-23"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<h3 id="anycast-dns">Anycast DNS</h3>
+<p>Utilitzar anycast permet dirigir les consultes al servidor més proper geogràficament:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1"># Configuració BGP per anycast (exemple amb BIRD)</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>protocol<span class="w"> </span>bgp<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nb">local</span><span class="w"> </span>as<span class="w"> </span><span class="m">65001</span><span class="p">;</span>
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">    </span>neighbor<span class="w"> </span><span class="m">192</span>.0.2.1<span class="w"> </span>as<span class="w"> </span><span class="m">65000</span><span class="p">;</span>
+</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>
+</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="w">    </span><span class="nb">export</span><span class="w"> </span>filter<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">net</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">203</span>.0.113.53/32<span class="w"> </span><span class="k">then</span><span class="w"> </span>accept<span class="p">;</span>
+</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">        </span>reject<span class="p">;</span>
+</span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">    </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-31-10"><a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="o">}</span>
+</span></code></pre></div>
+<hr />
+<h2 id="compliment-normatiu-i-estandards">Compliment Normatiu i Estàndards</h2>
+<h3 id="121-rfcs-principals">12.1 RFCs Principals</h3>
+<p>Els Request for Comments (RFCs) són els documents que defineixen els estàndards d'Internet. Els més importants per a DNS són:</p>
+<ul>
+<li><strong>RFC <a href="https://www.rfc-editor.org/rfc/rfc1034">1034</a> i <a href="https://www.rfc-editor.org/rfc/rfc1035">1035</a> (1987):</strong> Definicions bàsiques del DNS</li>
+<li><strong>RFC <a href="https://www.rfc-editor.org/rfc/rfc2181">2181</a> (1997):</strong> Clarificacions sobre l'especificació DNS</li>
+<li><strong>RFC <a href="https://www.rfc-editor.org/rfc/rfc2308">2308</a> (1998):</strong> Negative caching</li>
+<li><strong>RFC <a href="https://www.rfc-editor.org/rfc/rfc4033">4033-4035</a> (2005):</strong> DNSSEC</li>
+<li><strong>RFC <a href="https://www.rfc-editor.org/rfc/rfc6891">6891</a> (2013):</strong> Extension Mechanisms for DNS (EDNS)</li>
+<li><strong>RFC <a href="https://www.rfc-editor.org/rfc/rfc7858">7858</a> (2016):</strong> DNS over TLS (DoT)</li>
+<li><strong>RFC <a href="https://www.rfc-editor.org/rfc/rfc8484">8484</a> (2018):</strong> DNS over HTTPS (DoH)</li>
+<li><strong>RFC <a href="https://www.rfc-editor.org/rfc/rfc9250">9250</a> (2022):</strong> DNS over QUIC (DoQ)</li>
+</ul>
+<h3 id="compliment-gdpr">Compliment GDPR</h3>
+<p>Sota el GDPR, les consultes DNS poden contenir dades personals. Recomanacions:</p>
+<ul>
+<li>Minimitzar el logging de consultes DNS</li>
+<li>Anonimitzar adreces IP als logs</li>
+<li>Establir períodes de retenció curts</li>
+<li>Xifrar les comunicacions DNS (DoH/DoT)</li>
+</ul>
+<div class="admonition note annotate">
+<p class="admonition-title">La traçabilitat de la navegació</p>
+</div>
+<hr />
+<h2 id="casos-dus-i-escenaris-practics">Casos d'Ús i Escenaris Pràctics</h2>
+<h3 id="dns-per-a-active-directory">DNS per a Active Directory</h3>
+<p>Active Directory depèn completament del DNS per al seu funcionament:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1"># Zones necessàries per AD</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>_msdcs.domini.local
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>_sites.domini.local
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>_tcp.domini.local
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>_udp.domini.local
+</span></code></pre></div>
+<h3 id="dns-per-a-serveis-de-correu">DNS per a Serveis de Correu</h3>
+<p>Configuració completa per a un servidor de correu:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="c1"># Registres necessaris</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>@<span class="w">           </span>IN<span class="w">  </span>MX<span class="w">  </span><span class="m">10</span><span class="w">  </span>mail.exemple.cat.
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>mail<span class="w">        </span>IN<span class="w">  </span>A<span class="w">       </span><span class="m">203</span>.0.113.10
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>@<span class="w">           </span>IN<span class="w">  </span>TXT<span class="w">     </span><span class="s2">&quot;v=spf1 mx -all&quot;</span>
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>_dmarc<span class="w">      </span>IN<span class="w">  </span>TXT<span class="w">     </span><span class="s2">&quot;v=DMARC1; p=quarantine; rua=mailto:dmarc@exemple.cat&quot;</span>
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>default._domainkey<span class="w"> </span>IN<span class="w"> </span>TXT<span class="w"> </span><span class="s2">&quot;v=DKIM1; k=rsa; p=MIGfMA0GCS...&quot;</span>
+</span></code></pre></div>
+<h3 id="dns-per-a-balanceig-de-carrega">DNS per a Balanceig de Càrrega</h3>
+<p>Utilitzar múltiples registres A per distribuir trànsit:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>www<span class="w">         </span>IN<span class="w">  </span>A<span class="w">   </span><span class="m">203</span>.0.113.10
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>www<span class="w">         </span>IN<span class="w">  </span>A<span class="w">   </span><span class="m">203</span>.0.113.11
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>www<span class="w">         </span>IN<span class="w">  </span>A<span class="w">   </span><span class="m">203</span>.0.113.12
+</span></code></pre></div>
+<hr />
+<h2 id="14-tendencies-futures">14. Tendències Futures</h2>
+<h3 id="141-dns-over-https-doh-i-dns-over-tls-dot">14.1 DNS over HTTPS (DoH) i DNS over TLS (DoT)</h3>
+<p>Aquests protocols xifren les consultes DNS per millorar la privadesa. Configuració de DoT en BIND 9.18+:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>tls<span class="w"> </span>local-tls<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">    </span>cert-file<span class="w"> </span><span class="s2">&quot;/etc/bind/certs/cert.pem&quot;</span><span class="p">;</span>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">    </span>key-file<span class="w"> </span><span class="s2">&quot;/etc/bind/certs/key.pem&quot;</span><span class="p">;</span>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>
+</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>options<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="w">    </span>listen-on<span class="w"> </span>port<span class="w"> </span><span class="m">853</span><span class="w"> </span>tls<span class="w"> </span>local-tls<span class="w"> </span><span class="o">{</span><span class="w"> </span>any<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="p">;</span>
+</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="o">}</span><span class="p">;</span>
+</span></code></pre></div>
+<h3 id="142-dns-sobre-quic-doq">14.2 DNS sobre QUIC (DoQ)</h3>
+<p>Protocol emergent que combina els beneficis de DoH/DoT amb menor latència utilitzant QUIC.</p>
+<h3 id="143-integracio-amb-ia-i-machine-learning">14.3 Integració amb IA i Machine Learning</h3>
+<p>Detecció d'anomalies i predicció d'amenaces utilitzant IA, amb precisió del 96% en alguns sistemes comercials.</p>
+<hr />
+<h2 id="referencies-i-recursos">Referències i Recursos</h2>
+<h3 id="documentacio-oficial">Documentació Oficial</h3>
+<ul>
+<li><a href="https://www.isc.org/bind/"><strong>ISC BIND 9 Documentation</strong></a></li>
+<li><a href="https://docs.microsoft.com/windows-server/networking/dns/"><strong>Microsoft DNS Server</strong></a></li>
+<li><a href="https://www.rfc-editor.org/"><strong>RFC Editor</strong></a></li>
+</ul>
+<h3 id="llibres-recomanats">Llibres Recomanats</h3>
+<ul>
+<li>"DNS and BIND" de Cricket Liu i Paul Albitz (O'Reilly)</li>
+<li>"DNS for Rocket Scientists" de Ron Aitchison (disponible online a zytrax.com)</li>
+<li>"DNS Security: Defending the Domain Name System" de Allan Liska i Timothy Gallo</li>
+</ul>
+<h3 id="eines-i-recursos-online">Eines i Recursos Online</h3>
+<ul>
+<li><a href="https://dnsviz.net/"><strong>DNSViz:</strong></a> Eina de visualització DNSSEC </li>
+<li><a href="https://dnsdumpster.com/"><strong>DNS Dumpster:</strong></a> Eina de reconeixement DNS </li>
+<li><a href="https://mxtoolbox.com/"><strong>MXToolbox:</strong></a> Suite d'eines per a diagnòstic DNS </li>
+<li><a href="https://zonemaster.net/"><strong>Zonemaster:</strong></a> Eina de validació de zones DNS </li>
+</ul>
+<h3 id="comunitats-i-forums">Comunitats i Fòrums</h3>
+<ul>
+<li><strong>DNS-OARC:</strong> DNS Operations, Analysis, and Research Center</li>
+<li><strong>NANOG Mailing List:</strong> North American Network Operators Group</li>
+<li><strong>r/sysadmin:</strong> Comunitat de Reddit per a administradors de sistemes</li>
+</ul>
+<hr />
+<h2 id="glossari-de-termes">Glossari de Termes</h2>
+<ul>
+<li><strong>Authoritative Server:</strong> Servidor que conté la informació oficial d'una zona DNS</li>
+<li><strong>Cache:</strong> Memòria temporal que emmagatzema respostes DNS recents</li>
+<li><strong>CNAME Chasing:</strong> Procés de seguir cadenes de registres CNAME fins arribar a un registre A</li>
+<li><strong>FQDN (Fully Qualified Domain Name):</strong> Nom de domini complet incloent tots els nivells</li>
+<li><strong>Glue Record:</strong> Registre A necessari quan un servidor de noms està dins del seu propi domini</li>
+<li><strong>Iterative Query:</strong> Consulta on el servidor DNS retorna la millor resposta que pot sense fer consultes addicionals</li>
+<li><strong>NXDOMAIN:</strong> Resposta que indica que el domini consultat no existeix</li>
+<li><strong>Recursive Query:</strong> Consulta on el servidor DNS fa totes les consultes necessàries per obtenir la resposta completa</li>
+<li><strong>Root Hints:</strong> Llista d'adreces IP dels servidors arrel</li>
+<li><strong>Round-Robin DNS:</strong> Tècnica de balanceig de càrrega rotant entre múltiples registres A</li>
+<li><strong>SOA (Start of Authority):</strong> Registre que conté informació administrativa sobre la zona</li>
+<li><strong>Split-horizon DNS:</strong> Servir diferents respostes DNS segons l'origen de la consulta</li>
+<li><strong>TTL (Time To Live):</strong> Temps que una resposta DNS pot ser emmagatzemada en cache</li>
+<li><strong>Zone Transfer:</strong> Procés de copiar tots els registres d'una zona d'un servidor a un altre</li>
+<li><strong>Zone Walking:</strong> Tècnica per enumerar tots els registres d'una zona DNS</li>
+</ul>
+<hr />
+<h2 id="activitats">Activitats</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Peu de pàgina" >
+        
+          
+          <a href="../../DHCP/dhcp/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: DHCP">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                DHCP
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../serveiweb/serveisweb/" class="md-footer__link md-footer__link--next" aria-label="Següent: Serveis Web">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Següent
+              </span>
+              <div class="md-ellipsis">
+                Serveis Web
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://youtube.com/@francescbarragan" target="_blank" rel="noopener" title="youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://githum.com/francescbarragan" target="_blank" rel="noopener" title="githum.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://x.com/francescbarragan" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="fbarragan@sapalomera.cat" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.229 22.844H24V10.501l-8.628 5.882c-.613.419-1.226-.003-1.226-.003L0 6.646v13.969s0 2.229 2.229 2.229m12.558-9.273L24 7.261V1.156H2.229S0 1.156 0 3.384v.06z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiat al porta-retalls", "clipboard.copy": "C\u00f2pia al porta-retalls", "search.result.more.one": "1 m\u00e9s en aquesta p\u00e0gina", "search.result.more.other": "# m\u00e9s en aquesta p\u00e0gina", "search.result.none": "Cap document coincideix", "search.result.one": "1 document coincident", "search.result.other": "# documents coincidents", "search.result.placeholder": "Escriu per a comen\u00e7ar a cercar", "search.result.term.missing": "Desaparegut", "select.version": "Selecciona la versi\u00f3"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="../../js/mermaid_init.js"></script>
+      
+    
+  </body>
+</html>
